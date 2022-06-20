@@ -1,8 +1,18 @@
 <template>
-  <div id="nav"></div>
+  <div class="content">
+    <NavbarVue />
+  </div>
   <router-view />
 </template>
 
+<script>
+import NavbarVue from "./components/Navbar.vue";
+export default {
+  components: {
+    NavbarVue,
+  },
+};
+</script>
 <style>
 .content {
   margin: 0 auto;

@@ -7,7 +7,8 @@
       />
       <h1><router-link :to="{ name: 'Home' }">Stotka </router-link></h1>
       <div class="links">
-        <button>Logout</button>
+        <button @click="handleClick">Logout</button>
+
         <router-link class="btn" :to="{ name: 'signup' }">Signup</router-link>
         <router-link class="btn" :to="{ name: 'login' }">Login</router-link>
       </div>
@@ -16,7 +17,22 @@
 </template>
 
 <script>
-export default {};
+import useLogout from "../composables/composables/useLogout";
+import { useRouter } from "vue-router";
+export default {
+  setup() {
+    const { logout } = useLogout();
+    const router = useRouter();
+
+    const handleClick = async () => {
+      await logout();
+      console.log("user logged out");
+      router.push({ name: "login" });
+    };
+
+    return { handleClick };
+  },
+};
 </script>
 
 <style scoped>
@@ -36,10 +52,14 @@ button {
   margin-left: 16px;
   font-size: 14px;
 }
-nav nav {
+nav {
   display: flex;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+nav img {
+  max-height: 60px;
+  border-radius: 50%;
 }
 </style>
